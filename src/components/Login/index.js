@@ -21,10 +21,9 @@ export default function Login() {
         try {
             const response = await api.post('api/authenticate/login',data)
 
-            localStorage.setItem('email',email);;
-            localStorage.setItem('token', response.data.accessToken);
+            localStorage.setItem('email',email);
+            localStorage.setItem('token', response.data.token);
             //localStorage.setItem('expiration', response.data.expiration);
-
             history.push('/articles');
 
         } catch (error) {
@@ -32,6 +31,7 @@ export default function Login() {
         }
 
     }
+    
 
     return (
         <div className='login-container'>
