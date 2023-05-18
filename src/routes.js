@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from './components/Login';
 import Articles from "./components/Articles";
+import Profile from "./components/Profile";
+import Register from "./components/Register";
 
 
 export default function Routes(){
@@ -10,6 +12,8 @@ export default function Routes(){
             <Switch>
                 <Route path="/" exact component={Login}/>
                 <Route path="/articles" component={Articles} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/register" component={Register} />
             </Switch>
         </BrowserRouter>
     );
