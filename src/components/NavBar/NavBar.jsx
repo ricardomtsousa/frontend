@@ -31,7 +31,7 @@ const NavBar = () => {
     const [showNavLeft, setShowNavLeft] = useState(false);
 
     return (
-        <MDBNavbar expand='lg' light bgColor='light' style={{ marginTop: '20px', marginBottom: '20px', padding: '20px' }}>
+        <MDBNavbar expand='lg'  style={{ marginTop: '20px', marginBottom: '20px', padding: '20px' ,backgroundColor: '#eee'}}>
             <MDBContainer fluid>
                 <MDBNavbarToggler
                     type='button'
