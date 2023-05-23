@@ -81,8 +81,8 @@ function Profile() {
     <div className='profile-container' style={{ paddingLeft: '15%', paddingRight: '15%' }}>
       <NavBar />
       <MDBRow noGutters>
-  <MDBCol md='4' style={{ backgroundColor: 'blue', height: '100hv' }}>
-    <MDBCard className="">
+  <MDBCol md='3' style={{ backgroundColor: 'blue', height: '100hv' }}>
+    <MDBCard className="h-100">
       <MDBCardBody className="text-center">
         <MDBCardImage
           src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
@@ -92,15 +92,14 @@ function Profile() {
           fluid
         />
         <hr></hr>
-        <p className="text-muted mb-4">Ricardo Sousa</p>
+        <p className="text-muted mb-2">Ricardo Sousa</p>
         <div className="d-flex justify-content-center mb-2">
-          <MDBBtn>Button</MDBBtn>
           <MDBBtn outline className="ms-1">Logout</MDBBtn>
         </div>
       </MDBCardBody>
     </MDBCard>
   </MDBCol>
-  <MDBCol md='5' style={{ backgroundColor: 'purple' }}>
+  <MDBCol md='6' style={{ backgroundColor: 'purple' }}>
     <div className='pb-3'>
       <MDBCard className="mb-4">
         <MDBCardBody>
@@ -160,7 +159,7 @@ function Profile() {
     </MDBRow>
   </MDBCol>
   <MDBCol md='3' style={{ backgroundColor: 'black' }}>
-    <MDBCard className="mb-4 mb-lg-0">
+    <MDBCard className="mb-4 mb-lg-0 h-100">
       <MDBCardBody>
         <MDBCardTitle>Categorias Noticias</MDBCardTitle>
         {categoriesNewsData.map((categorie, index) => (

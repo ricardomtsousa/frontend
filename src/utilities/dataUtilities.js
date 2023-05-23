@@ -26,10 +26,16 @@ export const districtsData = [
 export const categoriesEventsData = [
   'Música',
   'Desporto',
-  'Cinema'
+  'Dança',
+  'Festivais',
+  'Teatro',
 ]
 export const categoriesNewsData = [
-  'MotoGP',
-  'F1',
-  'Exclusivo'
+  'Moto GP',
+  'Motocross',
+  'FÓRMULA 1',
+  'Futebol',
+  'Ralis',
+  'Atualidade',
+
 ]

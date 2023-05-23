@@ -9,27 +9,36 @@ import NavBar from '../NavBar/NavBar';
 function Articles() {
 
   const [articles, setArticles] = useState([]);
+  const [articlesCatergoriesList, setarticlesCatergoriesList] = useState([]);
 
+  useEffect(() => {
+    console.log("a");
+    const email = localStorage.email;
+    if (email) {
+      api.get('/news-categories', { params: { email: email } })
+        .then((response) => {
+          console.log("News Categories Response:", response.data);
+          setarticlesCatergoriesList(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [localStorage.email]);
+  
   useEffect(() => {
     console.log("b");
     api
-      .get('/api/Articles')
+      .post('/api/Articles/articlesList', articlesCatergoriesList)
       .then((response) => {
+        console.log("Articles Response:", response.data);
         setArticles(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
+  }, [articlesCatergoriesList]);
 
-  }, []);
-
-  const groupArticles = (articles, groupSize) => {
-    const groups = [];
-    for (let i = 0; i < articles.length; i += groupSize) {
-      groups.push(articles.slice(i, i + groupSize));
-    }
-    return groups;
-  };
 
   return (
     <section>

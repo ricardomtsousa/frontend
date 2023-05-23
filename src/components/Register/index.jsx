@@ -83,44 +83,48 @@ function Register() {
 
     return (
         <section style={{ backgroundColor: '#eee' }}>
-            <MDBContainer className="py-2 d-flex align-items-center justify-content-center" style={{ height: '100vh' }} >
-                <MDBRow>
-                    <MDBCard className="mb-4 mb-lg-0 " style={{ height: '70vh', width: '55vh' }}>
-                        <MDBCardBody>
-                            <form onSubmit={register}>
-                                <div className="form-group">
-                                    <h2>Crie a sua conta</h2>
-                                    <br></br>
-                                    <h6>Nome </h6>
-                                    <MDBInput wrapperClass='mb-4' size='lg' id='form1' type='text' required value={FullName}
-                                        onChange={e => setFullName(e.target.value)} />
-                                    <h6>Email </h6>
-                                    <MDBInput wrapperClass='mb-4' size='lg' id='form1' type='email' required value={email}
-                                        onChange={e => setEmail(e.target.value)} />
-                                        {emailError && (
-                                    <p className="text-danger">{emailError}</p>
-                                )}
-                                    <h6>PassWord </h6>
-                                    <MDBInput wrapperClass='mb-4'  size='lg' id='form1' type='password' required value={Password}
-                                        onChange={e => setPassword(e.target.value)} />
-                                    <h6>Confirmar PassWord </h6>
-                                    <MDBInput wrapperClass='mb-4' size='lg' id='form1' type='password' required value={ConfirmPassword}
-                                        onChange={e => setConfirmPassword(e.target.value)} />
-                                        {passwordsMatchError && (
-                                    <p className="text-danger">{passwordsMatchError}</p>
-                                )}
-
-                                    <button type="submit" class="btn btn-primary">Criar Conta</button>
-                                    <p className="small fw-bold mt-2 pt-1 mb-2">Já tem conta?
-                                        <a href="#!" className="link-danger" onClick={() => history.push('/')}>Login</a></p>
-                                </div>
-                            </form>
-
-                        </MDBCardBody>
-                    </MDBCard>
-                </MDBRow>
-            </MDBContainer>
-        </section>
+  <MDBContainer className="py-2 d-flex align-items-center justify-content-center" style={{ height: '100vh' }}>
+    <MDBRow>
+      <MDBCard className="mb-4 mb-lg-0" style={{ height: '70vh', width: '55vh' }}>
+        <MDBCardBody className="d-flex flex-column align-items-center justify-content-center overflow-auto">
+          <form onSubmit={register} className="">
+            <div className="form-group">
+              <h2>Crie a sua conta</h2>
+              <br></br>
+              <div className="mb-4">
+                <h6>Nome </h6>
+                <MDBInput size='lg' id='form1' type='text' required value={FullName} onChange={e => setFullName(e.target.value)} />
+              </div>
+              <div className="mb-4">
+                <h6>Email </h6>
+                <MDBInput size='lg' id='form1' type='email' required value={email} onChange={e => setEmail(e.target.value)} />
+                {emailError && (
+                  <p className="text-danger">{emailError}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <h6>PassWord </h6>
+                <MDBInput size='lg' id='form1' type='password' required value={Password} onChange={e => setPassword(e.target.value)} />
+              </div>
+              <div className="mb-4">
+                <h6>Confirmar PassWord </h6>
+                <MDBInput size='lg' id='form1' type='password' required value={ConfirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+                {passwordsMatchError && (
+                  <p className="text-danger">{passwordsMatchError}</p>
+                )}
+              </div>
+              <button type="submit" className="btn btn-primary">Criar Conta</button>
+              <p className="small fw-bold mt-2 pt-1 mb-2">
+                Já tem conta?
+                <a href="#!" className="link-danger" onClick={() => history.push('/')}>Login</a>
+              </p>
+            </div>
+          </form>
+        </MDBCardBody>
+      </MDBCard>
+    </MDBRow>
+  </MDBContainer>
+</section>
     );
 }
 export default (Register);
