@@ -5,15 +5,20 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import './styles.css';
 import ArticleComponent from './articleComponent.jsx';
 import NavBar from '../NavBar/NavBar';
+import jwtDecode from 'jwt-decode';
+
 
 function Articles() {
 
   const [articles, setArticles] = useState([]);
   const [articlesCatergoriesList, setarticlesCatergoriesList] = useState([]);
 
+  const savedToken = localStorage.getItem('token');
+  const decodedToken = jwtDecode(savedToken);
+  const email = decodedToken.email;
+
   useEffect(() => {
     console.log("a");
-    const email = localStorage.email;
     if (email) {
       api.get('/news-categories', { params: { email: email } })
         .then((response) => {

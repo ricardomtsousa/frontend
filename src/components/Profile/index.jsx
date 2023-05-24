@@ -29,6 +29,7 @@ import api from '../../services/api';
 import { districtsData, categoriesEventsData, categoriesNewsData } from '../../utilities/dataUtilities';
 import { useHistory } from 'react-router-dom';
 import withAuth from '../../utilities/withAuth';
+import jwtDecode from 'jwt-decode';
 
 
 function Profile() {
@@ -36,7 +37,10 @@ function Profile() {
   const [eventDistrictsList, seteventDistrictsList] = useState([]);
   const [eventCategoriesList, seteventCategoriesList] = useState([]);
   const [newsCategoriesList, setnewsCategoriesList] = useState([]);
-  const email = localStorage.email;
+  const savedToken = localStorage.getItem('token');
+  const decodedToken = jwtDecode(savedToken);
+  const email = decodedToken.email;
+  const name = decodedToken.fullname;
 
   function setUserData(setState, apiPath) {
     //const email = localStorage.email;
@@ -92,7 +96,7 @@ function Profile() {
           fluid
         />
         <hr></hr>
-        <p className="text-muted mb-2">Ricardo Sousa</p>
+        <p className="text-muted mb-2">{name}</p>
         <div className="d-flex justify-content-center mb-2">
           <MDBBtn outline className="ms-1">Logout</MDBBtn>
         </div>
@@ -108,7 +112,7 @@ function Profile() {
               <MDBCardText>Nome</MDBCardText>
             </MDBCol>
             <MDBCol sm="4">
-              <MDBCardText className="text-muted">Ricardo Sousa</MDBCardText>
+              <MDBCardText className="text-muted">{name}</MDBCardText>
             </MDBCol>
           </MDBRow>
           <hr />
@@ -116,7 +120,7 @@ function Profile() {
             <MDBCol sm="3">
               <MDBCardText>Email</MDBCardText>
             </MDBCol>
-            <MDBCol sm="4">
+            <MDBCol sm="5">
               <MDBCardText className="text-muted">{email}</MDBCardText>
             </MDBCol>
           </MDBRow>
