@@ -11,12 +11,11 @@ import {
 
 import './styles.css';
 import React, { useState, useEffect } from 'react';
-import Articles from '../Articles';
 import api from '../../services/api';
-import { districtsData, categoriesEventsData, categoriesNewsData } from '../../utilities/dataUtilities';
 import { useHistory } from 'react-router-dom';
 import withAuth from '../../utilities/withAuth';
 
+import ToastSnackBar from '../SnackBar/toastSnackBar';
 
 const RegisterCardComponent = () => {
 
@@ -27,6 +26,10 @@ const RegisterCardComponent = () => {
   const [passwordsMatchError, setPasswordsMatchError] = useState('');
   const [emailError, setemailError] = useState('');
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
   const history = useHistory();
 
 
@@ -34,73 +37,96 @@ const RegisterCardComponent = () => {
     event.preventDefault();
 
     if (Password !== ConfirmPassword) {
-      setPasswordsMatchError('As Passswords não coincidem');
+      setPasswordsMatchError('As passwords não coincidem');
       return;
-    }
-    else
+    } else {
       setPasswordsMatchError('');
+    }
 
     const data = {
-      FullName, email, Password, ConfirmPassword
+      FullName,
+      email,
+      Password,
+      ConfirmPassword
     };
 
-    const response = await api.post('api/authenticate/register', data)
-
-      .then(response => {
-        console.log(response.data.message);
-      })
-      .catch(error => {
-        // alert('Failed Register: ' + error.response.data.message)
+    try {
+      const response = await api.post('api/authenticate/register', data);
+      if(response.data.success== true)
+      {
+        handleOpenSnackbar('success', 'Conta criada com sucesso.');
+        setTimeout(() => {
+          history.push('/');
+        }, 2000);
+      }
+      console.log(response.data);
+    } catch (error) {
+      if (error.message === 'Network Error') {
+        handleOpenSnackbar('error', 'O serviço não está disponível. Error: ' + error.message);
+      }
+      if (error.response) {
         console.log(error);
         console.log(error.response.data.message);
-        if (error.response.data.message === 'Email already registered')
-          setemailError('Email já registado')
-        //console.log(error.response.data.errors);
-        /*const e = error.response.data.errors;
-        const eR = e.Email;
-        for (let i = 0; i < eR.length; i++) {
-            console.log('eR[' + i + ']:', eR[i]);
-            alert('Failed Register: ' + eR[i])
-        }*/
-      });
-
+        if (error.response.data.message === 'Email already registered') {
+          setemailError('Email já registado');
+        }
+      }
+      // Handle other error cases as needed
+    }
   }
+
+
+  const handleOpenSnackbar = (severity, message) => {
+    setSnackbarSeverity(severity);
+    setSnackbarMessage(message);
+    setOpenSnackbar(true);
+  };
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
 
 
   return (
     <div className="col-sm">
-          <MDBCard style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '10%', paddingBottom: '10%' }}>
-            <MDBCardBody>
-              <form onSubmit={register} className="">
-                  <h2>Crie a sua conta</h2>
-                  <div className="mb-2">
-                    <MDBInput size='lg' id='form1' placeholder='Nome' type='text' required value={FullName} onChange={e => setFullName(e.target.value)} />
-                  </div>
-                  <div className="mb-2">
-                    <MDBInput size='lg' id='form1' type='email' placeholder='Email' required value={email} onChange={e => setEmail(e.target.value)} />
-                    {emailError && (
-                      <p className="text-danger">{emailError}</p>
-                    )}
-                  </div>
-                  <div className="mb-2">
-                    <MDBInput size='lg' id='form1' type='password' placeholder='Password' required value={Password} onChange={e => setPassword(e.target.value)} />
-                  </div>
-                  <div className="mb-4">
-                    <MDBInput size='lg' id='form1' type='password' placeholder='Confirmar Password' required value={ConfirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
-                    {passwordsMatchError && (
-                      <p className="text-danger">{passwordsMatchError}</p>
-                    )}
-                  </div>
-                  <button type="submit" className="btn btn-primary">Criar Conta</button>
-                  <p className="">
-                    Já tem conta?
-                    <a href="#!" className="link-danger" onClick={() => history.push('/')}>Login</a>
-                  </p>
-                
-              </form>
-            </MDBCardBody>
-          </MDBCard>
-          </div>
+      <MDBCard style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '10%', paddingBottom: '10%' }}>
+        <MDBCardBody>
+          <ToastSnackBar
+            open={openSnackbar}
+            severity={snackbarSeverity}
+            message={snackbarMessage}
+            onClose={handleCloseSnackbar}
+          />
+          <form onSubmit={register} className="">
+            <h2>Crie a sua conta</h2>
+            <div className="mb-2">
+              <MDBInput size='lg' id='form1' placeholder='Nome' type='text' required value={FullName} onChange={e => setFullName(e.target.value)} />
+            </div>
+            <div className="mb-2">
+              <MDBInput size='lg' id='form1' type='email' placeholder='Email' required value={email} onChange={e => setEmail(e.target.value)} />
+              {emailError && (
+                <p className="text-danger">{emailError}</p>
+              )}
+            </div>
+            <div className="mb-2">
+              <MDBInput size='lg' id='form1' type='password' placeholder='Password' required value={Password} onChange={e => setPassword(e.target.value)} />
+            </div>
+            <div className="mb-4">
+              <MDBInput size='lg' id='form1' type='password' placeholder='Confirmar Password' required value={ConfirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+              {passwordsMatchError && (
+                <p className="text-danger">{passwordsMatchError}</p>
+              )}
+            </div>
+            <button type="submit" className="btn btn-primary">Criar Conta</button>
+            <p className="">
+              Já tem conta?
+              <a href="#!" className="link-danger" onClick={() => history.push('/')}>Login</a>
+            </p>
+
+          </form>
+        </MDBCardBody>
+      </MDBCard>
+    </div>
 
   );
 }
