@@ -58,7 +58,7 @@ const EventComponent = ({ image_url, category, event_date, title, link, district
             </div>
           </div>
           <div className="row mb-1">
-            <div className="col-4" style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+            <div className="col-5" style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
               <a >
                 <i className="fas fa-map-marker-alt" style={{ paddingRight: '5px' }}></i>
                 {district}

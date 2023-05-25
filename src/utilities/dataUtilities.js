@@ -33,7 +33,7 @@ export const categoriesEventsData = [
 export const categoriesNewsData = [
   'Moto GP',
   'Motocross',
-  'FÓRMULA 1',
+  'Fórmula 1',
   'Futebol',
   'Ralis',
   'Atualidade',

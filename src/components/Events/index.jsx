@@ -10,9 +10,12 @@ import jwtDecode from 'jwt-decode';
 function Events() {
 
   const [events, setEvents] = useState([]);
-  const savedToken = localStorage.getItem('token');
-  const decodedToken = jwtDecode(savedToken);
-  const email = decodedToken.email;
+  var email = "";
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  if(token){
+    const decodedToken = jwtDecode(token);
+     email = decodedToken.email;
+  }
 
   useEffect(() => {
     console.log("a");

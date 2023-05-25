@@ -1,21 +1,23 @@
 button.selected {
-    background-color: blue;
-    color: white;
-  }
+  background-color: blue;
+  color: white;
+}
 
-  .image-aspect-ratio {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  }
-  
-  .category-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px; /* Adjust the value to control the roundness of the corners */
+.image-aspect-ratio {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio */
+}
 
-  }
+.category-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  /* Adjust the value to control the roundness of the corners */
+
+}

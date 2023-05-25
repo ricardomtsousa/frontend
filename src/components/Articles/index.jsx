@@ -13,9 +13,16 @@ function Articles() {
   const [articles, setArticles] = useState([]);
   const [articlesCatergoriesList, setarticlesCatergoriesList] = useState([]);
 
-  const savedToken = localStorage.getItem('token');
+  /*const savedToken = localStorage.getItem('token');
   const decodedToken = jwtDecode(savedToken);
-  const email = decodedToken.email;
+  const email = decodedToken.email;*/
+  var email = "";
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  if(token){
+    const decodedToken = jwtDecode(token);
+     email = decodedToken.email;
+  }
+  
 
   useEffect(() => {
     console.log("a");
@@ -30,9 +37,9 @@ function Articles() {
         });
     }
   }, [localStorage.email]);
-  
+
   useEffect(() => {
-    console.log("b");
+
     api
       .post('/api/Articles/articlesList', articlesCatergoriesList)
       .then((response) => {
@@ -47,19 +54,18 @@ function Articles() {
 
   return (
     <section>
-      <div className="x" style={{ paddingLeft: '15%', paddingRight: '15%' }}>
+      <div className="x" style={{ paddingLeft: '15%', paddingRight: '15%', backgroundColor: '#f9f9f9' }}>
         <NavBar />
         <div className="row gx-lg-5 d-flex align-items-center justify-content-center" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}>
           {articles.map(article => (
-            
+
             <ArticleComponent
               key={article.id}
               image_url={article.image_link}
               category={article.category}
               date={article.date}
               title={article.title}
-              link={article.link}
-            />
+              link={article.link} />
           ))}
         </div>
       </div>

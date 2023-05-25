@@ -39,7 +39,8 @@ const LoginCardComponent = () => {
       const token = response.data;
 
       if (token) {
-        localStorage.setItem('token', token);
+        const storage = document.getElementById('flexCheckDefault').checked ? localStorage : sessionStorage;
+        storage.setItem('token', token);
         const decodedToken = jwtDecode(token);
         const email = decodedToken.email;
 
@@ -113,7 +114,7 @@ const LoginCardComponent = () => {
 
             <div className="mb-4">
               <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Manter sessão iniciada' />
-              <a href="!#">Recuperar password</a>
+              <a href="!#" >Recuperar password</a>
             </div>
 
             <div className='text-md-start mt-2  text-start'>
