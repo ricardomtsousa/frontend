@@ -37,5 +37,7 @@ export const categoriesNewsData = [
   'Futebol',
   'Ralis',
   'Atualidade',
+  'Enduro',
+  'TT'
 
 ]

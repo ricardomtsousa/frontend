@@ -37,10 +37,14 @@ function Profile() {
   const [eventDistrictsList, seteventDistrictsList] = useState([]);
   const [eventCategoriesList, seteventCategoriesList] = useState([]);
   const [newsCategoriesList, setnewsCategoriesList] = useState([]);
-  const savedToken = localStorage.getItem('token');
-  const decodedToken = jwtDecode(savedToken);
-  const email = decodedToken.email;
-  const name = decodedToken.fullname;
+  var email = "";
+  var name  = '';
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  if(token){
+    const decodedToken = jwtDecode(token);
+     email = decodedToken.email;
+     name = decodedToken.fullname;
+  }
 
   function setUserData(setState, apiPath) {
     //const email = localStorage.email;
