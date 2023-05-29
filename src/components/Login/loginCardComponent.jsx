@@ -114,7 +114,7 @@ const LoginCardComponent = () => {
 
             <div className="mb-4">
               <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Manter sessão iniciada' />
-              <a href="!#" >Recuperar password</a>
+              <a onClick={() => history.push('/password-reset-email')} >Recuperar password</a>
             </div>
 
             <div className='text-md-start mt-2  text-start'>

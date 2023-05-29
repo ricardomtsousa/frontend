@@ -30,19 +30,32 @@ const ResetPasswordCardComponent = () => {
     setToken(tokenn);
   }, []);
 
-  const resetPassword = () => {
+
+  async function resetPassword(event) {
+    event.preventDefault();
+
+    const data = {
+      userId,
+      token,
+      password,
+    };
+
     if (password !== confirmPassword) {
+      console.log('userIdd:', userId);
+      console.log('tokenn:', token);
       // Passwords don't match, handle the error (e.g., show error message)
       return;
     }
+    try {
+      console.log('EMAIL:', data.email);
+      const response = await api.post('/password-reset', data)
 
-    api.post('/password-reset', { userId, token, password })
-      .then(response => {
-        // Handle the response (e.g., show success message, redirect to login page)
-      })
-      .catch(error => {
-        // Handle the error (e.g., show error message)
-      });
+      // Rest of the code
+    } catch (error) {
+      console.error('Error sending password reset email:', error);
+    }
+
+
   };
 
   return (
