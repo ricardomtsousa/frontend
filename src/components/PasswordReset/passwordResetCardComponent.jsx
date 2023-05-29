@@ -21,6 +21,23 @@ const ResetPasswordCardComponent = () => {
   const [userId, setUserId] = useState('');
   const [token, setToken] = useState('');
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const history = useHistory();
+
+
+  const handleOpenSnackbar = (severity, message) => {
+    setSnackbarSeverity(severity);
+    setSnackbarMessage(message);
+    setOpenSnackbar(true);
+  };
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const userIdd = urlParams.get('userId');
@@ -31,8 +48,16 @@ const ResetPasswordCardComponent = () => {
   }, []);
 
 
-  async function resetPassword(event) {
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const resetPassword = async (event) => {
     event.preventDefault();
+
+    if (password !== confirmPassword) {
+      console.log('Passwords do not match');
+      // Handle the password mismatch error (e.g., show an error message)
+      return;
+    }
 
     const data = {
       userId,
@@ -40,22 +65,33 @@ const ResetPasswordCardComponent = () => {
       password,
     };
 
-    if (password !== confirmPassword) {
-      console.log('userIdd:', userId);
-      console.log('tokenn:', token);
-      // Passwords don't match, handle the error (e.g., show error message)
-      return;
-    }
     try {
       console.log('EMAIL:', data.email);
-      const response = await api.post('/password-reset', data)
+      const response = await api.post('/password-reset', data);
 
-      // Rest of the code
+      // Check if the request was successful
+      if (response.status === 200) {
+        console.log('Password reset successful');
+        handleOpenSnackbar('success', 'Password alterada com sucesso.');
+        setTimeout(() => {
+          history.push('/');
+        }, 2000);
+      } else {
+        console.log('Failed to reset password');
+        // Show an error message or perform other actions
+      }
     } catch (error) {
-      console.error('Error sending password reset email:', error);
+      // Check if the error response has a message
+      if (error.response.data === 'Invalid token') {
+        handleOpenSnackbar('error', 'Token Invalido.');
+        console.error('a:', error.response.data);
+        setErrorMessage(error.response.data); // Set the error message in the state
+        // Show the error message or perform other actions
+      } else {
+        console.error('b:', error);
+        // Show a generic error message or perform other actions
+      }
     }
-
-
   };
 
   return (
@@ -63,6 +99,12 @@ const ResetPasswordCardComponent = () => {
     <div className="col-sm">
       <MDBCard style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '10%', paddingBottom: '10%' }}>
         <MDBCardBody>
+          <ToastSnackBar
+            open={openSnackbar}
+            severity={snackbarSeverity}
+            message={snackbarMessage}
+            onClose={handleCloseSnackbar}
+          />
 
           <form onSubmit={resetPassword} className="">
             <h2>Recuperar Password</h2>

@@ -17,17 +17,37 @@ import { useLocation } from 'react-router-dom';
 
 const EmailResetPasswordCardComponent = () => {
     const [email, setEmail] = useState('');
-    
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
+    const handleOpenSnackbar = (severity, message) => {
+        setSnackbarSeverity(severity);
+        setSnackbarMessage(message);
+        setOpenSnackbar(true);
+    };
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
+    };
+
+
     async function handleResetPassword(event) {
         event.preventDefault();
         const data = {
             email,
-          };
-    
-            
+        };
+
+
         try {
+
             console.log('EMAIL:', data.email);
-        const response = await api.post('/password-reset-email', data);
+            const response = await api.post('/password-reset-email', data);
+            if (response.status === 200) {
+
+                handleOpenSnackbar('success', 'Email enviado com sucesso.');
+
+            }
 
             // Rest of the code
         } catch (error) {
@@ -40,6 +60,13 @@ const EmailResetPasswordCardComponent = () => {
         <div className="col-sm">
             <MDBCard style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '10%', paddingBottom: '10%' }}>
                 <MDBCardBody>
+                    <ToastSnackBar
+                        open={openSnackbar}
+                        severity={snackbarSeverity}
+                        message={snackbarMessage}
+                        onClose={handleCloseSnackbar}
+                    />
+
                     <form onSubmit={handleResetPassword} className="">
                         <h2>Recuperar Password</h2>
                         <div>
