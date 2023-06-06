@@ -10,6 +10,7 @@ const ArticleComponent = ({ image_url, category, date, title, link }) => {
     'Ralis': 'fas fa-car',
     'Moto GP': 'fas fa-motorcycle',
     'Motocross': 'fas fa-motorcycle',
+    'Enduro': 'fas fa-motorcycle',
     'TT': 'fas fa-flag-checkered',
   };
 
