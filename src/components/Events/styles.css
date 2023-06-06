@@ -21,3 +21,7 @@ button.selected {
   /* Adjust the value to control the roundness of the corners */
 
 }
+.category-text {
+  color: #2012D5 !important;
+  font-weight: bolder;
+}

@@ -117,7 +117,7 @@ const RegisterCardComponent = () => {
                 <p className="text-danger">{passwordsMatchError}</p>
               )}
             </div>
-            <button type="submit" className="btn btn-primary">Criar Conta</button>
+            <button type="submit" className="btn warning-button">Criar Conta</button>
             <p className="">
               Já tem conta?
               <a href="#!" className="link-danger" onClick={() => history.push('/')}>Login</a>

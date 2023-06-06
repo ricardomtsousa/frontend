@@ -9,7 +9,8 @@ const ArticleComponent = ({ image_url, category, date, title, link }) => {
     'Fórmula 1': 'fas fa-car',
     'Ralis': 'fas fa-car',
     'Moto GP': 'fas fa-motorcycle',
-    'Motocross': 'fas fa-motorcycle'
+    'Motocross': 'fas fa-motorcycle',
+    'TT': 'fas fa-flag-checkered',
   };
 
   const titleRef = useRef(null);

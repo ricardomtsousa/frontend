@@ -106,7 +106,7 @@ const LoginCardComponent = () => {
               {emailError && (
                 <p className="text-danger">{emailError}</p>
               )}
-              <MDBInput wrapperClass='mb-4' required placeholder='Password' id='formControlLg' type='password' size="lg" value={password} onChange={e => setPassword(e.target.value)} />
+              <MDBInput wrapperClass='mb-2' required placeholder='Password' id='formControlLg' type='password' size="lg" value={password} onChange={e => setPassword(e.target.value)} />
               {passwordError && (
                 <p className="text-danger">{passwordError}</p>
               )}
@@ -114,7 +114,7 @@ const LoginCardComponent = () => {
 
             <div className="mb-4">
               <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Manter sessão iniciada' />
-              <a onClick={() => history.push('/password-reset-email')} >Recuperar password</a>
+              <a class="link-opacity-100-hover" href="/password-reset-email">Recuperar password</a>
             </div>
 
             <div className='text-md-start mt-2  text-start'>

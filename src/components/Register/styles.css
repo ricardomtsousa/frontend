@@ -12,3 +12,30 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .warning-button {
+    background-color: #F83C10;
+    color: white;
+    font-weight: bold;
+    text-transform: none;
+    border-radius: 5px;
+    /* Hover styles */
+    &:hover {
+      background-color: white; /* Inverted background color on hover */
+      color: #F83C10; /* Inverted text color on hover */
+    }
+    /* Add any other styles you want */
+  }
+  .custom-outline-warning {
+    box-shadow: 0px 0px 00px rgba(9, 244, 32, 0.2)!important;
+    text-transform: none;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #F83C10!important; /* Text color */
+    border-color: #F83C10 !important; /* Outline color */
+    &:hover {
+      background-color: #F83C10!important; /* Inverted background color on hover */
+      color: white!important;
+      border-color: white !important; /* Inverted text color on hover */
+    }
+  }
+  

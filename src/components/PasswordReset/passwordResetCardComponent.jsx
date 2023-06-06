@@ -109,16 +109,16 @@ const ResetPasswordCardComponent = () => {
           <form onSubmit={resetPassword} className="">
             <h2>Recuperar Password</h2>
             <div>
-              <MDBInput wrapperClass='mb-4' required placeholder='Nova Password' id='formControlLg' type='password' size="lg" value={password} onChange={e => setPassword(e.target.value)} />
+              <MDBInput wrapperClass='mb-2' required placeholder='Nova Password' id='formControlLg' type='password' size="lg" value={password} onChange={e => setPassword(e.target.value)} />
 
-              <MDBInput wrapperClass='mb-4' required placeholder='Confirmar Password' id='formControlLg' type='password' size="lg" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+              <MDBInput wrapperClass='mb-2' required placeholder='Confirmar Password' id='formControlLg' type='password' size="lg" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
 
             </div>
 
 
 
             <div className='text-md-start mt-2  text-start'>
-              <button type="submit" class="btn warning-button">Entrar</button>
+              <button type="submit" class="btn warning-button">Confirmar</button>
 
             </div>
           </form>

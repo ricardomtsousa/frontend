@@ -44,7 +44,7 @@ const EventComponent = ({ image_url, category, event_date, title, link, district
         <div>
           <div className="row mb-1" style={{ paddingTop: '0px', marginTop: '0px' }}>
             <div className="col-6" style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-              <a className="text-info">
+              <a className="category-text">
                 {category && <i className={categoryIcons[category]}></i>}
                 {category}
               </a>
