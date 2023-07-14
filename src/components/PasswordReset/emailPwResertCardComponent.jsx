@@ -21,6 +21,7 @@ const EmailResetPasswordCardComponent = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
     const [snackbarMessage, setSnackbarMessage] = useState('');
+    const history = useHistory();
 
     const handleOpenSnackbar = (severity, message) => {
         setSnackbarSeverity(severity);
@@ -45,13 +46,14 @@ const EmailResetPasswordCardComponent = () => {
             const response = await api.post('/password-reset-email', data);
             if (response.status === 200) {
 
-                handleOpenSnackbar('success', 'Email enviado com sucesso.');
+                handleOpenSnackbar('success', 'Email enviado com sucesso');
+                setTimeout(() => {
+                    history.push('/');
+                }, 2000);
 
             }
-
-            // Rest of the code
         } catch (error) {
-            console.error('Error sending password reset email:', error);
+            handleOpenSnackbar('error', 'Não foi possivel enviar o email. Error: ' + error.message);
         }
     };
 
@@ -70,7 +72,7 @@ const EmailResetPasswordCardComponent = () => {
                     <form onSubmit={handleResetPassword} className="">
                         <h2>Recuperar Password</h2>
                         <div>
-                            <MDBInput wrapperClass='mb-4' required placeholder='O seu email' id='formControlLg' type='email' size="lg" value={email} onChange={e => setEmail(e.target.value)} />
+                            <MDBInput wrapperClass='mb-4' required placeholder='O seu email' type='email' size="lg" value={email} onChange={e => setEmail(e.target.value)} />
                         </div>
 
                         <div className='text-md-start mt-2  text-start'>

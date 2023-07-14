@@ -52,8 +52,10 @@ const RegisterCardComponent = () => {
 
     try {
       const response = await api.post('api/authenticate/register', data);
+      console.log(response.data)
       if(response.data.success== true)
       {
+        console.log("awgawg")
         handleOpenSnackbar('success', 'Conta criada com sucesso.');
         setTimeout(() => {
           history.push('/');

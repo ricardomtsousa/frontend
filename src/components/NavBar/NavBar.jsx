@@ -35,7 +35,6 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    // Update activeNavItem based on the current route
     const currentPath = location.pathname;
 
     if (currentPath === '/profile') {

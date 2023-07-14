@@ -50,8 +50,6 @@ const LoginCardComponent = () => {
 
       }
 
-      // The HTTP-only cookie will be automatically stored and sent by the browser
-      // with subsequent requests to the same domain.
 
     } catch (error) {
 
