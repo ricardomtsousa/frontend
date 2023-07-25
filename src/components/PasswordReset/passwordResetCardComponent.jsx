@@ -55,7 +55,7 @@ const ResetPasswordCardComponent = () => {
 
     if (password !== confirmPassword) {
       console.log('Passwords do not match');
-      // Handle the password mismatch error (e.g., show an error message)
+      
       return;
     }
 
@@ -78,18 +78,17 @@ const ResetPasswordCardComponent = () => {
         }, 2000);
       } else {
         console.log('Failed to reset password');
-        // Show an error message or perform other actions
+       
       }
     } catch (error) {
       // Check if the error response has a message
       if (error.response.data === 'Invalid token') {
         handleOpenSnackbar('error', 'Token Invalido.');
         console.error('a:', error.response.data);
-        setErrorMessage(error.response.data); // Set the error message in the state
-        // Show the error message or perform other actions
+        setErrorMessage(error.response.data); 
       } else {
         console.error('b:', error);
-        // Show a generic error message or perform other actions
+        
       }
     }
   };

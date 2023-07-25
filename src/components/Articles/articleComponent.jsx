@@ -23,7 +23,7 @@ const ArticleComponent = ({ image_url, category, date, title, link }) => {
   }, []);
 
   const handleDivClick = () => {
-    window.location.href = link; // Replace with your desired link
+    window.location.href = link; 
   };
 
   return (

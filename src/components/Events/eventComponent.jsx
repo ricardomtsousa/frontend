@@ -21,7 +21,7 @@ const EventComponent = ({ image_url, category, event_date, title, link, district
   }, []);
 
   const handleDivClick = () => {
-    window.location.href = link; // Replace with your desired link
+    window.location.href = link; 
   };
 
   return (
